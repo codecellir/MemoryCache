@@ -15,7 +15,7 @@ namespace MemoryCache.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var models = await _cacheManager.GetAsync("CodeCell.ir", async () => GetCodeCellCourseTitle(),1);
+            var models = await _cacheManager.GetAsync("CodeCell.ir", async () => GetCodeCellCourseTitle(),10);
             return View(models);
         }
 
