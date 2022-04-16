@@ -8,7 +8,7 @@
         /// <typeparam name="T">Type of cached item.</typeparam>
         /// <param name="key">Cache key.</param>
         /// <param name="acquire">Function to load item if it's not in the cache yet.</param>
-        /// <param name="cacheTime">Cache time in minutes; pass 0 to do not cache;</param>
+        /// <param name="cacheTime">Cache time in second; pass 0 to do not cache;</param>
         /// <returns>The cached value associated with the specified key</returns>
         T Get<T>(string key, Func<T> acquire, int cacheTime);
 
@@ -18,7 +18,7 @@
         /// <typeparam name="T">Type of cached item.</typeparam>
         /// <param name="key">Cache key.</param>
         /// <param name="acquire">Function to load item if it's not in the cache yet.</param>
-        /// <param name="cacheTime">Cache time in minutes; pass 0 to do not cache;</param>
+        /// <param name="cacheTime">Cache time in second; pass 0 to do not cache;</param>
         /// <returns>The cached value associated with the specified key.</returns>
         Task<T> GetAsync<T>(string key, Func<Task<T>> acquire, int cacheTime);
 
@@ -27,7 +27,7 @@
         /// </summary>
         /// <param name="key">Key of cached item.</param>
         /// <param name="data">Value for caching.</param>
-        /// <param name="cacheTime">Cache time in minutes.</param>
+        /// <param name="cacheTime">Cache time in second.</param>
         void Set(string key, object data, int cacheTime);
 
         /// <summary>

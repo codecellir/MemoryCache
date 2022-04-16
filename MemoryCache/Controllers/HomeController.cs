@@ -1,32 +1,33 @@
-﻿using MemoryCache.Models;
+﻿using MemoryCache.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace MemoryCache.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ICacheManager _cacheManager;
+        public HomeController(ILogger<HomeController> logger, ICacheManager cacheManager)
         {
             _logger = logger;
+            _cacheManager = cacheManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var models = await _cacheManager.GetAsync("CodeCell.ir", async () => GetCodeCellCourseTitle(),1);
+            return View(models);
         }
 
-        public IActionResult Privacy()
+        private IEnumerable<string> GetCodeCellCourseTitle()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return new List<string>
+            {
+                "asp core 6",
+                ".net maui",
+                "cache",
+                "dapper in asp core"
+            };
         }
     }
 }
