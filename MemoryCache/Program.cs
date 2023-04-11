@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddMemoryCache();
 builder.Services.AddScoped(typeof(ICacheManager),typeof(CacheManager));
 
 var app = builder.Build();
